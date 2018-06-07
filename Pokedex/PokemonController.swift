@@ -6,7 +6,7 @@
 //  Copyright © 2018 Falcone Development. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class PokemonController {
     
@@ -36,6 +36,25 @@ class PokemonController {
             } catch {
                 callback([], "Failed to decode data into Pokemon.")
             }
+        }.resume()
+    }
+    
+    static func fetchImage(for pokemon: Pokemon, callback: @escaping (_ image: UIImage?) -> Void) {
+        guard let url = URL(string: pokemon.imageUrlString) else {
+            callback(nil)
+            return
+        }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard error == nil else {
+                callback(nil)
+                return
+            }
+            guard let data = data, let image = UIImage(data: data) else {
+                callback(nil)
+                return
+            }
+            print("Fetched image for: #\(pokemon.entryNumber) \(pokemon.name)")
+            callback(image)
         }.resume()
     }
 }

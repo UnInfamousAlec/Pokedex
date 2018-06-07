@@ -11,20 +11,22 @@ import UIKit
 class PokedexTableViewController: UITableViewController {
     
     var pokemon: [Pokemon] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         fetchPokedex()
     }
     
     func fetchPokedex() {
         PokemonController.fetchKantoPokedex { (pokemon, errorMessage) in
-            if let errorMessage = errorMessage {
-                self.showErrorAlert(errorMessage)
-            } else {
-                self.pokemon = pokemon
-                self.tableView.reloadData()
+            DispatchQueue.main.async {
+                if let errorMessage = errorMessage {
+                    self.showErrorAlert(errorMessage)
+                } else {
+                    self.pokemon = pokemon
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -35,25 +37,34 @@ class PokedexTableViewController: UITableViewController {
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pokemon.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath) as! PokemonCell
+        
         let pokemon = self.pokemon[indexPath.row]
-        cell.textLabel?.text = pokemon.name.uppercased()
-        cell.detailTextLabel?.text = "#\(pokemon.entryNumber)"
-
+        cell.nameLabel?.text = pokemon.name.uppercased()
+        cell.entryNumberLabel?.text = "#\(pokemon.entryNumber)"
+        cell.tag = indexPath.row
+        
+        PokemonController.fetchImage(for: pokemon) { (image) in
+            DispatchQueue.main.async {
+                if indexPath.row == cell.tag {
+                    cell.pokemonImageView?.image = image
+                }
+            }
+        }
+        
         return cell
     }
 }
