@@ -42,6 +42,9 @@ class PokemonController {
     static func fetchImage(for pokemon: Pokemon, callback: @escaping (_ image: UIImage?) -> Void) {
         if let image = CacheManager.shared.image(for: pokemon) {
             callback(image)
+        } else if let image = FileHelper.retrieve(imageFor: pokemon) {
+            CacheManager.shared.cache(image, for: pokemon)
+            callback(image)
         } else {
             guard let url = URL(string: pokemon.imageUrlString) else {
                 callback(nil)
@@ -58,6 +61,7 @@ class PokemonController {
                 }
                 print("Fetched image for: #\(pokemon.entryNumber) \(pokemon.name)")
                 CacheManager.shared.cache(image, for: pokemon)
+                FileHelper.store(image, for: pokemon)
                 callback(image)
             }.resume()
         }
