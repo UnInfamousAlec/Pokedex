@@ -10,6 +10,12 @@ import UIKit
 
 class PokemonController {
     
+    /**
+     Fetches the Kanto region pokedex
+     
+     - parameter pokemon: The array of pokemon in the pokedex.
+     - parameter errorMessage: An optional `String` that will be returned if the call is not successful.
+     */
     static func fetchKantoPokedex(callback: @escaping (_ pokemon: [Pokemon], _ errorMessage: String?) -> Void) {
         guard let url = URL(string: "https://pokeapi.co/api/v2/pokedex/2/") else {
             callback([], "Failed to create pokedex URL.")
@@ -39,6 +45,12 @@ class PokemonController {
         }.resume()
     }
     
+    /**
+     Fetches the sprite image for a pokemon
+     
+     - parameter pokemon: This should be the pokemon you want an image for.
+     - parameter image: This will be the pokemon's image if an image is found for the specified pokemon.
+     */
     static func fetchImage(for pokemon: Pokemon, callback: @escaping (_ image: UIImage?) -> Void) {
         guard let url = URL(string: pokemon.imageUrlString) else {
             callback(nil)
