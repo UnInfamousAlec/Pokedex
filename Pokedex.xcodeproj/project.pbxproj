@@ -11,6 +11,7 @@
 		2C0B74B320C8B5A200E7A81D /* PokemonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B74B220C8B5A200E7A81D /* PokemonController.swift */; };
 		2C0B74B520C8B65500E7A81D /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B74B420C8B65500E7A81D /* Pokemon.swift */; };
 		2C0B74B720C8C73D00E7A81D /* PokemonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0B74B620C8C73C00E7A81D /* PokemonCell.swift */; };
+		2C1F2FB820C8CBD300EF694A /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1F2FB720C8CBD300EF694A /* CacheManager.swift */; };
 		2C7EE5AB20C8A98A00BCD529 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7EE5AA20C8A98A00BCD529 /* AppDelegate.swift */; };
 		2C7EE5B020C8A98A00BCD529 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C7EE5AE20C8A98A00BCD529 /* Main.storyboard */; };
 		2C7EE5B220C8A98B00BCD529 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C7EE5B120C8A98B00BCD529 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		2C0B74B220C8B5A200E7A81D /* PokemonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonController.swift; sourceTree = "<group>"; };
 		2C0B74B420C8B65500E7A81D /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		2C0B74B620C8C73C00E7A81D /* PokemonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCell.swift; sourceTree = "<group>"; };
+		2C1F2FB720C8CBD300EF694A /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		2C7EE5A720C8A98A00BCD529 /* Pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C7EE5AA20C8A98A00BCD529 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C7EE5AF20C8A98A00BCD529 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				2C0B74B020C8B0CE00E7A81D /* PokedexTableViewController.swift */,
 				2C0B74B620C8C73C00E7A81D /* PokemonCell.swift */,
 				2C0B74B220C8B5A200E7A81D /* PokemonController.swift */,
+				2C1F2FB720C8CBD300EF694A /* CacheManager.swift */,
 				2C0B74B420C8B65500E7A81D /* Pokemon.swift */,
 				2C7EE5AA20C8A98A00BCD529 /* AppDelegate.swift */,
 				2C7EE5AE20C8A98A00BCD529 /* Main.storyboard */,
@@ -148,6 +151,7 @@
 				2C0B74B120C8B0CE00E7A81D /* PokedexTableViewController.swift in Sources */,
 				2C0B74B520C8B65500E7A81D /* Pokemon.swift in Sources */,
 				2C7EE5AB20C8A98A00BCD529 /* AppDelegate.swift in Sources */,
+				2C1F2FB820C8CBD300EF694A /* CacheManager.swift in Sources */,
 				2C0B74B320C8B5A200E7A81D /* PokemonController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

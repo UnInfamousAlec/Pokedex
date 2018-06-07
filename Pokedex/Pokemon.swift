@@ -20,10 +20,6 @@ struct Pokemon: Decodable {
     
     struct Species: Decodable {
         let name: String
-        
-//        enum CodingKeys: String, CodingKey {
-//            case name = "name"
-//        }
     }
     
     var name: String {
@@ -32,6 +28,10 @@ struct Pokemon: Decodable {
     
     var imageUrlString: String {
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(entryNumber).png"
+    }
+    
+    var cacheKey: NSString {
+        return NSString(string: String(entryNumber))
     }
 }
 

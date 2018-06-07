@@ -36,25 +36,30 @@ class PokemonController {
             } catch {
                 callback([], "Failed to decode data into Pokemon.")
             }
-        }.resume()
+            }.resume()
     }
     
     static func fetchImage(for pokemon: Pokemon, callback: @escaping (_ image: UIImage?) -> Void) {
-        guard let url = URL(string: pokemon.imageUrlString) else {
-            callback(nil)
-            return
-        }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard error == nil else {
-                callback(nil)
-                return
-            }
-            guard let data = data, let image = UIImage(data: data) else {
-                callback(nil)
-                return
-            }
-            print("Fetched image for: #\(pokemon.entryNumber) \(pokemon.name)")
+        if let image = CacheManager.shared.image(for: pokemon) {
             callback(image)
-        }.resume()
+        } else {
+            guard let url = URL(string: pokemon.imageUrlString) else {
+                callback(nil)
+                return
+            }
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                guard error == nil else {
+                    callback(nil)
+                    return
+                }
+                guard let data = data, let image = UIImage(data: data) else {
+                    callback(nil)
+                    return
+                }
+                print("Fetched image for: #\(pokemon.entryNumber) \(pokemon.name)")
+                CacheManager.shared.cache(image, for: pokemon)
+                callback(image)
+            }.resume()
+        }
     }
 }
