@@ -35,11 +35,11 @@ class FileHelper {
         let fileUrl = self.fileUrl(for: pokemon)
         
         guard fileManager.fileExists(atPath: fileUrl.path) == false else {
-            print("Failed to store image. File exists at: \(fileUrl.path).")
+            print("Failed to store image for #\(pokemon.entryNumber) \(pokemon.name). File exists at: \(fileUrl.path).")
             return
         }
         guard let imageData = UIImageJPEGRepresentation(image, 1.0) else {
-            print("Failed to store image. Could not convert image to Data.")
+            print("Failed to store image for #\(pokemon.entryNumber) \(pokemon.name). Could not convert image to Data.")
             return
         }
         do {
