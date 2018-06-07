@@ -56,13 +56,10 @@ class PokedexTableViewController: UITableViewController {
         let pokemon = self.pokemon[indexPath.row]
         cell.nameLabel?.text = pokemon.name.uppercased()
         cell.entryNumberLabel?.text = "#\(pokemon.entryNumber)"
-        cell.tag = indexPath.row
         
         PokemonController.fetchImage(for: pokemon) { (image) in
             DispatchQueue.main.async {
-                if indexPath.row == cell.tag {
-                    cell.pokemonImageView?.image = image
-                }
+                cell.pokemonImageView?.image = image
             }
         }
         
