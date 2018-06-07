@@ -20,10 +20,6 @@ struct Pokemon: Decodable {
     
     struct Species: Decodable {
         let name: String
-        
-//        enum CodingKeys: String, CodingKey {
-//            case name = "name"
-//        }
     }
     
     var name: String {
