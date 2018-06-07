@@ -9,15 +9,31 @@
 import UIKit
 
 class PokedexTableViewController: UITableViewController {
+    
+    var pokemon: [Pokemon] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        fetchPokedex()
+    }
+    
+    func fetchPokedex() {
+        PokemonController.fetchKantoPokedex { (pokemon, errorMessage) in
+            if let errorMessage = errorMessage {
+                self.showErrorAlert(errorMessage)
+            } else {
+                self.pokemon = pokemon
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func showErrorAlert(_ errorMessage: String) {
+        let alert = UIAlertController(title: "Error Occurred :(", message: errorMessage, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,14 +44,15 @@ class PokedexTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return pokemon.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "pokemonCell", for: indexPath)
 
-        // Configure the cell...
+        let pokemon = self.pokemon[indexPath.row]
+        cell.textLabel?.text = pokemon.name.uppercased()
+        cell.detailTextLabel?.text = "#\(pokemon.entryNumber)"
 
         return cell
     }

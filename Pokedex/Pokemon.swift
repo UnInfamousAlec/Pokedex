@@ -8,18 +8,38 @@
 
 import Foundation
 
-struct Pokemon: Codable {
+struct Pokemon: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case entryNumber = "entry_number"
-        case name = "name"
+        case species = "pokemon_species"
     }
     
     let entryNumber: Int
-    let name: String
+    let species: Species
+    
+    struct Species: Decodable {
+        let name: String
+        
+//        enum CodingKeys: String, CodingKey {
+//            case name = "name"
+//        }
+    }
+    
+    var name: String {
+        return species.name
+    }
     
     var imageUrlString: String {
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(entryNumber).png"
     }
 }
 
+struct PokedexResponse: Decodable {
+    
+    enum CodingKeys: String, CodingKey {
+        case pokemon = "pokemon_entries"
+    }
+    
+    let pokemon: [Pokemon]
+}

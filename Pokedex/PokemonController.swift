@@ -30,11 +30,12 @@ class PokemonController {
             }
             do {
                 let decoder = JSONDecoder()
-                let pokemon = try decoder.decode([Pokemon].self, from: data)
+                let pokedexResponse = try decoder.decode(PokedexResponse.self, from: data)
+                let pokemon = pokedexResponse.pokemon
                 callback(pokemon, nil)
             } catch {
                 callback([], "Failed to decode data into Pokemon.")
             }
-        }
+        }.resume()
     }
 }
