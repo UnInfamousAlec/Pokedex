@@ -15,11 +15,18 @@ class FileHelper {
     static var pokedexDirectory: URL {
         let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let pokedexDirectory = documentsDirectory.appendingPathComponent("Pokedex", isDirectory: true)
+        if fileManager.fileExists(atPath: pokedexDirectory.path) == false {
+            do {
+                try fileManager.createDirectory(at: pokedexDirectory, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print("Failed to create Pokedex file path.")
+            }
+        }
         return pokedexDirectory
     }
     
     static func fileUrl(for pokemon: Pokemon) -> URL {
-        let imageName = "#\(pokemon.entryNumber)\(pokemon.name).png"
+        let imageName = "\(pokemon.entryNumber)\(pokemon.name).png"
         let fileUrl = pokedexDirectory.appendingPathComponent(imageName)
         return fileUrl
     }
@@ -50,5 +57,13 @@ class FileHelper {
                 return nil
         }
         return image
+    }
+    
+    static func deletePokedexDirectory() {
+        do {
+        try fileManager.removeItem(at: pokedexDirectory)
+        } catch {
+            print("Failed to delete pokedex directory. Error: \(error)")
+        }
     }
 }
