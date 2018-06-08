@@ -61,7 +61,7 @@ class FileHelper {
     
     static func deletePokedexDirectory() {
         do {
-        try fileManager.removeItem(at: pokedexDirectory)
+            try fileManager.removeItem(at: pokedexDirectory)
         } catch {
             print("Failed to delete pokedex directory. Error: \(error)")
         }
